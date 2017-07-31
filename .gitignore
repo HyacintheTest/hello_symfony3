@@ -1,0 +1,34 @@
+# Email spool folder
+/ctest_apps/app/spool/*
+
+# Cache, session files and logs (Symfony3)
+/ctest_apps//var/cache/*
+/ctest_apps//var/logs/*
+/ctest_apps//var/sessions/*
+!ctest_apps/var/cache/.gitkeep
+!ctest_apps/var/logs/.gitkeep
+!ctest_apps/var/sessions/.gitkeep
+
+# Parameters
+!app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/ctest_apps//app/bootstrap.php.cache
+/ctest_apps//var/bootstrap.php.cache
+/ctest_apps//bin/*
+!ctest_apps/bin/console
+!ctest_apps/bin/symfony_requirements
+
+# Assets and user uploads
+/ctest_apps/web/bundles/
+/ctest_apps/web/uploads/
+
+# Build data
+/ctest_apps/build/
+
+#mysql data
+/mysql_data/
+
+# Backup entities generated with doctrine:generate:entities command
+**/Entity/*~

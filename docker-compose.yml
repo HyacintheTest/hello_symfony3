@@ -1,0 +1,41 @@
+#Symfony app container
+hello:
+  build: .
+  command: php -S 0.0.0.0:80 -t /app/web
+  links:
+    - database
+  ports:
+    - 3001:80
+  volumes:
+    - ./hello:/app
+app:
+  build: .    #Build the docker file
+  command: php -S 0.0.0.0:80 -t /app/web
+  links:
+    - database
+  ports:
+    - 3000:80
+  volumes:
+    - ./ctest_apps:/app
+#database container
+database:
+  image: mysql
+  ports:
+    - 5000:3306
+  environment:
+    MYSQL_ROOT_PASSWORD: erTYuiop_2017
+    MYSQL_DATABASE: ctest_database
+  volumes:
+    - ./mysql_data:/var/lib/mysql
+#phpmyadmin container
+test_phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  ports:
+    - 4000:80
+  links:
+    - database
+  environment:
+    - PMA_HOST=database
+    - PMA_PORT=3306
+    - PMA_USER=root
+    - PMA_PASSWORD=erTYuiop_2017
