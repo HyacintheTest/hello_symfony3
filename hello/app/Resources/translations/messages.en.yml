@@ -1,0 +1,4 @@
+symfony:
+    message: I like symfony
+users:
+    number: "{0}pas d'utilisateur|{1}%count% utilisateur|]1,Inf[%count% utilisateurs"

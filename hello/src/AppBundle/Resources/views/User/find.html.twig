@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}AppBundle:User:find{% endblock %}
+
+{% block body %}
+<h1>Result for search '{{ name }}'</h1>
+<div style="width: 40%; display: inline-block">
+	{% if users is empty %}
+		NO MATCH FOUND
+	{% else %}
+		{% for user in users %}
+			{{ user.id }} -- {{ user.firstName }} -- {{ user.lastName|upper }} -- {{ user.email }} <br/>
+		{% endfor%}
+	{% endif %}
+</div>	
+<div style="width: 40%; display: inline-block; background-color: gray">
+	{{render(controller('AppBundle:User:list')) }}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ database_name }}{% endblock %}
+
+{% block body %}
+{% for flash in app.session.flashbag.get('success') %}
+	{{ flash }}
+{% endfor %}
+<h1>Liste</h1>
+{{ key|trans}}
+<ul>
+	{% for user in users %}
+		<li> {{ user.email }}</li>
+	{% endfor%}
+</ul>
+{% endblock %}

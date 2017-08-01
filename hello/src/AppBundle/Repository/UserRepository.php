@@ -10,11 +10,12 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function getByFirstNameLike($firstName)
+	public function getByNameLike($name)
 	{
 		return $this->createQueryBuilder('u')
-			->where('u.firstName LIKE %:name%')
-			->setParameter('name', $firstName)
+			->where('u.firstName LIKE :name')
+			->orWhere('u.lastName LIKE :name')
+			->setParameter('name', '%'.$name.'%')
 			->getQuery()
 			->getResult();
 	}
