@@ -1,14 +1,17 @@
 #Symfony app container
 hello:
+  container_name: p_hello
   build: .
   command: php -S 0.0.0.0:80 -t /app/web
   links:
     - database
+    - app
   ports:
     - 3001:80
   volumes:
     - ./hello:/app
 app:
+  container_name: p_app
   build: .    #Build the docker file
   command: php -S 0.0.0.0:80 -t /app/web
   links:
@@ -19,6 +22,7 @@ app:
     - ./ctest_apps:/app
 #database container
 database:
+  container_name: p_database
   image: mysql
   ports:
     - 5000:3306
@@ -29,6 +33,7 @@ database:
     - ./mysql_data:/var/lib/mysql
 #phpmyadmin container
 test_phpmyadmin:
+  container_name: p_phpmyadmin
   image: phpmyadmin/phpmyadmin
   ports:
     - 4000:80

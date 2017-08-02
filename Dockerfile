@@ -15,7 +15,7 @@ RUN apt-get update && \
 #Installation of php
 RUN apt-get update && \
 	apt-get install -y php libapache2-mod-php  \
-	php-cli php-mysqlnd php-xml && \
+	php-cli php-mysqlnd php-xml php-curl && \
 	rm -rf /var/lib/apt/lists/*
 
 #Adding the application code
