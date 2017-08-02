@@ -26,9 +26,18 @@ class UserController extends Controller
 		dump($this->get('translator')->trans($key));
 		dump($this->get('translator')->transChoice('users.number', $usersNumber));
 		
+		$qb = $manager->getRepository('AppBundle:User')->createQueryBuilderGetAll();
+		$paginator  = $this->get('knp_paginator');
+		$pagination = $paginator->paginate(
+			$qb,
+			$request->query->getInt('page', 1),
+			2
+		);
+		
         return $this->render('AppBundle:User:list.html.twig', array(
             'users' => $users,
-			'key' => $key
+			'key' => $key,
+			'pagination' => $pagination
         ));
     }
 

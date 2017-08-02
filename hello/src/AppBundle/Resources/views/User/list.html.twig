@@ -13,4 +13,11 @@
 		<li> {{ user.email }}</li>
 	{% endfor%}
 </ul>
+<h1>Liste paginée</h1>
+<ul>
+	{% for user in pagination %}
+		<li> {{ user.email }}</li>
+	{% endfor%}
+</ul>
+{{ knp_pagination_render(pagination) }}
 {% endblock %}

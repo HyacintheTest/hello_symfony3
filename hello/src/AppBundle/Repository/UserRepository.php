@@ -19,4 +19,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 			->getQuery()
 			->getResult();
 	}
+	
+	public function createQueryBuilderGetAll() {
+		return $this->createQueryBuilder('u');
+	}
 }
