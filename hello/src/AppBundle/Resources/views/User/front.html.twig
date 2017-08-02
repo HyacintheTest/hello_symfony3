@@ -1,0 +1,77 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}ANGULAR APP{% endblock %}
+
+{% block body %}
+	<h1> ANGULAR APP </h1>
+	<div>
+		<h2> Liste des produits</h2>
+		<ul id="productList">
+		</ul>
+	</div>
+	<div>
+		<h2> Ajouter un produit </h2>
+		<div id="form">
+			<input id="name" type="text"/>
+			<input id="price" type="text"/>
+			<button id="submit">Valider</button>
+		</div>
+		<div id="message"></div> 
+	</div>
+	
+<script  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous">
+	  
+</script>	
+  
+
+<script>
+	function getList() {
+		$.ajax({
+			url: "http://localhost:3000/app_dev.php/products/list",
+			context: document.body
+		}).done(function(data) {		
+			var str = '';
+			for(i=0; i<data.length; i++) {
+				str += '<li>' + data[i].name + ' ---- ' + data[i].price + '</li>';
+			}
+			$('#productList').html(str);
+		});
+	}
+	
+	getList();
+	
+	$('#submit').click(function(){
+		var data = {
+			name: $('#name').val(),
+			price: $('#price').val()
+		};
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:3000/app_dev.php/products/add",
+			data: JSON.stringify(data),
+			success: function(data) {				
+				var message = 'unknown',				
+				code = data.code;
+				if(code === 400) {
+					var message = '<ul>',
+					errors = data.data;
+					for(i=0; i<errors.length; i++) {
+						message += '<li>' + errors[i] + '</li>';
+					}
+					message += '</ul>';
+				} else if (code === 200) {
+					getList();
+					message = 'Success';
+				}
+				
+				$('#message').html(message);
+			},
+			dataType: 'json'
+		});
+	});
+	  
+</script>
+	
+{% endblock %}

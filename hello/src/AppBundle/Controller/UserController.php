@@ -87,4 +87,13 @@ class UserController extends Controller
             'users' => $users
         ));
     }
+
+    /**
+     * @Route("/front", name="user_front")
+     */
+    public function frontAction()
+    {
+        return $this->render('AppBundle:User:front.html.twig', array(
+        ));
+    }
 }

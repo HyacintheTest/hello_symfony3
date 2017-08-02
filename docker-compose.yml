@@ -4,6 +4,7 @@ hello:
   command: php -S 0.0.0.0:80 -t /app/web
   links:
     - database
+    - app
   ports:
     - 3001:80
   volumes:
